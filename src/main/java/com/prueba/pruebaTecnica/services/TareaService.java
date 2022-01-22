@@ -14,8 +14,8 @@ public class TareaService implements ITareaService{
     @Autowired
     TareaRepository tareaRepository;
 
-    public ArrayList<TareaModel> consultarTareas() {
-        return (ArrayList<TareaModel>) tareaRepository.findAll();
+    public ArrayList<TareaModel> consultarTareas(Long id) {
+        return (ArrayList<TareaModel>) tareaRepository.consultarTareas(id);
     }
 
     public TareaModel guardarTarea(TareaModel tarea) {

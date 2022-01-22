@@ -1,6 +1,7 @@
 package com.prueba.pruebaTecnica.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import com.prueba.pruebaTecnica.models.UsuarioModel;
 import com.prueba.pruebaTecnica.repositories.UsuarioRepository;
@@ -20,6 +21,10 @@ public class UsuarioService implements IUsuarioService{
 
     public UsuarioModel guardarUsuario(UsuarioModel usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    public Optional<UsuarioModel> consultarUsuarioById(Long id) {
+        return usuarioRepository.findById(id);
     }
 
     public UsuarioModel consultarUsuarioByEmail(String email) {

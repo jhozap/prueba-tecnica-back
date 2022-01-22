@@ -1,6 +1,7 @@
 package com.prueba.pruebaTecnica.controllers;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import com.prueba.pruebaTecnica.Dto.UsuarioDto;
 import com.prueba.pruebaTecnica.models.UsuarioModel;
@@ -28,6 +29,11 @@ public class UsuarioController {
     @GetMapping(path="/listar")
     public ArrayList<UsuarioModel> consultarUsuarios() {
         return usuarioService.consultarUsuarios();
+    }
+
+    @GetMapping(path="/listar/{id}")
+    public Optional<UsuarioModel> consultarUsuarios(@PathVariable("id") Long id) {
+        return usuarioService.consultarUsuarioById(id);
     }
 
     @PostMapping(path="/guardar")

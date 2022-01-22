@@ -1,6 +1,7 @@
 package com.prueba.pruebaTecnica.controllers;
 
 import com.prueba.pruebaTecnica.Dto.LoginDto;
+import com.prueba.pruebaTecnica.Dto.UserResponseDto;
 import com.prueba.pruebaTecnica.models.UsuarioModel;
 import com.prueba.pruebaTecnica.services.AuthService;
 import com.prueba.pruebaTecnica.util.Jwt;
@@ -20,17 +21,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired(required=true)
-    private AuthService authService;
+    @Autowired
+    AuthService authService;
+
+    UserResponseDto userResponse = new UserResponseDto();
        
 
     @PostMapping(value="/login")
-    public String login(@RequestBody LoginDto auth) {
-        
+    public UserResponseDto login(@RequestBody LoginDto auth) {
         UsuarioModel usr = authService.login(auth);
         if(usr == null) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         String token = Jwt.getJWTToken(usr.getEmail());
-        return "Bearer "+token;        
+        userResponse.setUser(usr.getNombre() + " " + usr.getApellido());
+        userResponse.setToken(token);
+        return userResponse;
     }
     
 

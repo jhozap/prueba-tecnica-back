@@ -29,8 +29,7 @@ public class PruebaTecnicaApplication {
 				.addFilterAfter(new Auth(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-				//.antMatchers(HttpMethod.POST, "/api/usuarios/guardar").permitAll()
-				//.antMatchers(HttpMethod.POST, "/api/tareas/guardar").permitAll()
+					.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 				.antMatchers(HttpMethod.GET,
 				"/swagger-resources/**",
 				"/swagger-ui.html",

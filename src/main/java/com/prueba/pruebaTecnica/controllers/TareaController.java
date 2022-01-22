@@ -31,7 +31,10 @@ public class TareaController {
 
     @GetMapping(value="/listar")
     public ArrayList<TareaModel> consultarTareas() {
-        return tareaService.consultarTareas();
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = auth.getName();
+        UsuarioModel user = usuarioService.consultarUsuarioByEmail(userEmail);
+        return tareaService.consultarTareas(user.getId());
     }
 
     @PostMapping(value="/guardar")
